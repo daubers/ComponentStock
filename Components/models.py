@@ -25,6 +25,7 @@ class Component(models.Model):
         Basic component class
     """
     name = models.CharField(max_length=255)
+    part_no = models.CharField(max_length=255)
     supplier = models.ForeignKey(supplier)
     cost = models.IntegerField()
     manufacturer = models.ForeignKey(Manufacturer)

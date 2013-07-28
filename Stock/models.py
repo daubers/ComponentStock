@@ -10,7 +10,7 @@ class PurchaseOrder(models.Model):
     supplier = models.ForeignKey(supplier)
     components = models.ManyToManyField(Component, through='PurchaseOrderToComponent')
     delivery_cost = models.FloatField()
-    date_arrived = models.DateField(null=True)
+    date_arrived = models.DateField(null=True, blank=True)
 
 
 class PurchaseOrderToComponent(models.Model):

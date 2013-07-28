@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Current Stock</title>
+</head>
+<body>
+    <table>
+        <tr><th>Name</th><th>Part No</th><th>Cost</th><th>Quantity</th></tr>
+        {% for component in stock.Stock.all %}
+            <tr><td>{{ component.component.name }}</td><td>{{ component.component.part_no }}</td><td> {{ component.quantity }}</td></tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
