@@ -1,5 +1,5 @@
 from django.db import models
-from Components.models import Component, supplier
+from Components.models import Component, Supplier
 
 
 class PurchaseOrder(models.Model):
@@ -7,7 +7,7 @@ class PurchaseOrder(models.Model):
         Describes a supplier order
     """
     date = models.DateField()
-    supplier = models.ForeignKey(supplier)
+    supplier = models.ForeignKey(Supplier)
     components = models.ManyToManyField(Component, through='PurchaseOrderToComponent')
     delivery_cost = models.FloatField()
     date_arrived = models.DateField(null=True, blank=True)

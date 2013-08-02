@@ -2,7 +2,14 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 import json
 
-from Components.models import Component, supplier
+from Components.models import Component, Supplier, Manufacturer
+
+def newManufacturer(request):
+    """
+        Create a new manufacturer in the database
+    """
+    if request.method == "POST":
+        data = json.loads(request.POST['DATA'])
 
 
 def newSupplier(request):
@@ -18,7 +25,7 @@ def newSupplier(request):
             account_no = None
         #now create a new supplier
         try:
-            newSupply = supplier(name=data['name'], url=data['url'], account_no=account_no, account_username=data['account_username'])
+            newSupply = Supplier(name=data['name'], url=data['url'], account_no=account_no, account_username=data['account_username'])
             newSupply.save()
             json_data = json.dumps({"HTTPRESPONSE": newSupply.id})
         except:
@@ -49,7 +56,7 @@ def newComponent(request):
             min_quantity = None
         try:
             #get the supplier object
-            sup = supplier.objects.filter(id=data['supplier']).get()
+            sup = Supplier.objects.filter(id=data['supplier']).get()
             comp = Component(name=data['name'], cost=data['cost'], manufacturer=data['manufacturer'],
                              part_no=data['part_no'], datasheet_uri=data['datasheet_uri'],
                              supplier=sup, max_quantity=max_quantity, min_quantity=min_quantity)

@@ -1,1 +1,3 @@
-This file was created by PyCharm 2.7.3 for binding GitHub repository
+This will be a simple database for storing component stock levels.
+
+It will be based around a JSON api, so I can make an android app for it too :)

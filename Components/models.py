@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class supplier(models.Model):
+class Supplier(models.Model):
     """
         Describes a supplier
     """
@@ -26,7 +26,7 @@ class Component(models.Model):
     """
     name = models.CharField(max_length=255)
     part_no = models.CharField(max_length=255)
-    supplier = models.ForeignKey(supplier)
+    supplier = models.ForeignKey(Supplier)
     cost = models.IntegerField()
     manufacturer = models.ForeignKey(Manufacturer)
     datasheet_uri = models.URLField(null=True)

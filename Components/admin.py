@@ -1,6 +1,6 @@
 from django.contrib import admin
-from models import Component, supplier, Manufacturer
+from models import Component, Supplier, Manufacturer
 
 admin.site.register(Component)
-admin.site.register(supplier)
+admin.site.register(Supplier)
 admin.site.register(Manufacturer)

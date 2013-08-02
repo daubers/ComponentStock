@@ -1,0 +1,15 @@
+Quick rundown of API functions so I don't forget
+
+========
+    Components
+========
+
+To create a new supplier post a JSON dictionary with the following keys as DATA
+
+    name : Text string, maximum 255 characters
+    url : String, maximum 255 characters
+    account_no : Optional, String
+    account_username : String, maximum 255 characters
+
+Returns HTTPRESPONSE = id on success, Null on failure#
+
