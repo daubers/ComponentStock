@@ -18,7 +18,7 @@ class Manufacturer(models.Model):
         Describes a manufacturer
     """
     name = models.CharField(max_length=255)
-
+    url = models.URLField()
 
 class Component(models.Model):
     """

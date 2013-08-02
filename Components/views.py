@@ -10,6 +10,15 @@ def newManufacturer(request):
     """
     if request.method == "POST":
         data = json.loads(request.POST['DATA'])
+        try:
+            newMan = Manufacturer(name=data['name'], url=data['url'])
+            newMan.save()
+            json_data = json.dumps({"HTTPRESPONSE": newMan.id})
+        except Exception, e:
+            json_data = json.dumps({"HTTPRESPONSE": e.message})
+    else:
+        json_data = json.dumps({"HTTPRESPONSE": None})
+    return HttpResponse(json_data, mimetype="application/json")
 
 
 def newSupplier(request):
