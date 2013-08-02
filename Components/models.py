@@ -10,7 +10,7 @@ class supplier(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField()
     account_no = models.CharField(max_length=255, null=True)
-    account_name = models.CharField(max_length=255)
+    account_username = models.CharField(max_length=255)
 
 
 class Manufacturer(models.Model):
