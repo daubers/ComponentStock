@@ -8,9 +8,10 @@ class ComponentTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_adding_a_supplier(self):
+    def addSupplier(self):
         """
-            Attempts to add a new supplier
+            Add a supplier to the database
+            returns the response
         """
         compDict = {
             "name": "Google",
@@ -18,7 +19,44 @@ class ComponentTestCase(TestCase):
             "account_username": "Bob",
         }
         postDict = json.dumps(compDict)
-        response = self.client.post('/supplier/add/', {'DATA': postDict,})
+        response = self.client.post('/supplier/add/', {'DATA': postDict, })
+        return response
+
+    def addManufacturer(self):
+        """
+            Add a manufacturer to the database
+            returns the response
+        """
+        compDict = {
+            "name": "Google",
+            "url": "http://www.google.com",
+        }
+        postDict = json.dumps(compDict)
+        response = self.client.post('/manufacturer/add/', {'DATA': postDict,})
+        return response
+
+    def test_adding_a_manufacturer(self):
+        """
+            Attempts to add a manufactuerer to the database
+        """
+        response = self.addManufacturer()
+        self.assertContains(response, "{\"HTTPRESPONSE\": 1}")
+
+    def test_adding_a_supplier(self):
+        """
+            Attempts to add a new supplier to the database
+        """
+        response = self.addSupplier()
+        self.assertContains(response, "{\"HTTPRESPONSE\": 1}")
+
+    def test_adding_a_component(self):
+        """
+            Attempts to add a new supplier
+        """
+        response = self.addSupplier()
+        self.assertContains(response, "{\"HTTPRESPONSE\": 1}")
+
+        response = self.addManufacturer()
         self.assertContains(response, "{\"HTTPRESPONSE\": 1}")
 
         compDict = {
@@ -31,5 +69,4 @@ class ComponentTestCase(TestCase):
         }
         postDict = json.dumps(compDict)
         response = self.client.post('/component/add/', {'DATA': postDict,})
-        print response
         self.assertContains(response, "{\"HTTPRESPONSE\": 1}")

@@ -66,7 +66,8 @@ def newComponent(request):
         try:
             #get the supplier object
             sup = Supplier.objects.filter(id=data['supplier']).get()
-            comp = Component(name=data['name'], cost=data['cost'], manufacturer=data['manufacturer'],
+            manf = Manufacturer.objects.filter(id=data['manufacturer']).get()
+            comp = Component(name=data['name'], cost=data['cost'], manufacturer=manf,
                              part_no=data['part_no'], datasheet_uri=data['datasheet_uri'],
                              supplier=sup, max_quantity=max_quantity, min_quantity=min_quantity)
 

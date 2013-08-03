@@ -17,4 +17,5 @@ urlpatterns = patterns('',
 
     url(r'^component/add/', 'Components.views.newComponent'),
     url(r'^supplier/add/', 'Components.views.newSupplier'),
+    url(r'^manufacturer/add/', 'Components.views.newManufacturer'),
 )
