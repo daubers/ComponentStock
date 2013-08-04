@@ -79,3 +79,20 @@ def newComponent(request):
         json_data = json.dumps({"HTTPRESPONSE": None})
     # json data is just a JSON string now.
     return HttpResponse(json_data, mimetype="application/json")
+
+
+def getManufacturer(request):
+    """
+        Returns a json dictionary of all the manufacturers
+        Can optionally be filtered by id
+    """
+    returnObject = None
+    if request.method == "POST":
+        data = json.loads(request.POST['DATA'])
+        if data['id'] is None:
+            returnObject = Manufacturer.objects.all()
+        else:
+            returnObject = Manufacturer.objects.filter(id=data['id']).get()
+        return HttpResponse(json.dumps(returnObject), mimetype="application/json")
+    else:
+        return HttpResponse(json.dumps({"HTTPRESPONSE": None}))
