@@ -4,6 +4,13 @@ import json
 
 from Components.models import Component, Supplier, Manufacturer
 
+
+def newManufacturerForm(request):
+    """
+        A simple form to add a new manufacturer
+    """
+
+
 def newManufacturer(request):
     """
         Create a new manufacturer in the database
