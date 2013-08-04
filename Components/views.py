@@ -90,7 +90,7 @@ def getManufacturer(request):
     if request.method == "POST":
         data = json.loads(request.POST['DATA'])
         if data['id'] is None:
-            returnObject = Manufacturer.objects.all()
+            returnObject = list(Manufacturer.objects.all().values())
         else:
             returnObject = Manufacturer.objects.filter(id=data['id']).get()
         return HttpResponse(json.dumps(returnObject), mimetype="application/json")

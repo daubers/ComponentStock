@@ -41,7 +41,8 @@ class ComponentTestCase(TestCase):
         """
         response = self.addManufacturer()
         self.assertContains(response, "{\"HTTPRESPONSE\": 1}")
-        response = self.client.post('/manufacturer/add/', {'DATA': json.dumps({"id": None}), })
+        response = self.client.post('/manufacturer/get/', {'DATA': json.dumps({"id": None}), })
+        self.assertContains(response, "[{\"url\": \"http://www.google.com\", \"id\": 1, \"name\": \"Google\"}]")
 
     def test_adding_a_supplier(self):
         """
