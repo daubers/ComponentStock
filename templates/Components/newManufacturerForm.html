@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "Components/FormBase.html" %}
+
+{% block content %}
     <form>
         <table>
-            <tr><td>Manufacturer Name</td><td><input type="text" /> </td></tr>
-            <tr><td>Manufacturer URL</td><td><input type="url" /> </td></tr>
-            <tr><td colspan="2"> <input type="submit"/> </td></tr>
+            <tr><td>Manufacturer Name</td><td><input type="text" value=""   id="manName"/> </td></tr>
+            <tr><td>Manufacturer URL</td><td><input type="url" value="" id="manUrl"/> </td></tr>
+            <tr><td colspan="2"> <input type="button" id="submitFormButton" onclick="submitForm();" value="submit" /></td></tr>
         </table>
     </form>
-</body>
-</html>
+{% endblock %}

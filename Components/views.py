@@ -3,12 +3,17 @@ from django.template import RequestContext, loader
 import json
 
 from Components.models import Component, Supplier, Manufacturer
+from django.template.loader import get_template
+from django.template import Context
 
 
 def newManufacturerForm(request):
     """
         A simple form to add a new manufacturer
     """
+    t = get_template('Components/newManufacturerForm.html')
+    html = t.render(Context())
+    return HttpResponse(html)
 
 
 def newManufacturer(request):
@@ -17,7 +22,9 @@ def newManufacturer(request):
     """
     if request.method == "POST":
         data = json.loads(request.POST['DATA'])
+        print request.POST['DATA']
         try:
+            print(data)
             newMan = Manufacturer(name=data['name'], url=data['url'])
             newMan.save()
             json_data = json.dumps({"HTTPRESPONSE": newMan.id})
