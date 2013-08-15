@@ -16,6 +16,15 @@ def newManufacturerForm(request):
     return HttpResponse(html)
 
 
+def newComponentForm(request):
+    """
+        A simple form to add a new component
+    """
+    t = get_template('Components/newComponent.html')
+    html = t.render(Context())
+    return HttpResponse(html)
+
+
 def newManufacturer(request):
     """
         Create a new manufacturer in the database
@@ -33,6 +42,7 @@ def newManufacturer(request):
     else:
         json_data = json.dumps({"HTTPRESPONSE": None})
     return HttpResponse(json_data, mimetype="application/json")
+
 
 
 def newSupplier(request):
@@ -57,6 +67,14 @@ def newSupplier(request):
         json_data = json.dumps({"HTTPRESPONSE": None})
     # json data is just a JSON string now.
     return HttpResponse(json_data, mimetype="application/json")
+
+
+def getSuppliers(request):
+    """
+        Returns a JSON formatted dictionary of suppliers
+    """
+    return None
+
 
 def newComponent(request):
     """
@@ -109,4 +127,5 @@ def getManufacturer(request):
             returnObject = Manufacturer.objects.filter(id=data['id']).get()
         return HttpResponse(json.dumps(returnObject), mimetype="application/json")
     else:
-        return HttpResponse(json.dumps({"HTTPRESPONSE": None}))
+        returnObject = list(Manufacturer.objects.all().values())
+        return HttpResponse(json.dumps(returnObject))
