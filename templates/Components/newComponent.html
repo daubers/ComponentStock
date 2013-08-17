@@ -1,22 +1,24 @@
 {% extends "Components/FormBase.html" %}
 
 {% block head %}
+    <script src="/static/JS/newManufacturer.js" type="text/javascript" ></script>
     <script src="/static/JS/newComponent.js" type="text/javascript" ></script>
-    <script type="text/javascript">$.ready(loadComplete());</script>
+    <script type="text/javascript">$(document).ready(loadComplete());</script>
 {% endblock %}
 
 {% block content %}
+    <div id="dialogDiv"></div>
     <form>
         <table>
-            <tr><td>Component Name</td><td><input type="text" value=""   id="compName"/> </td></tr>
-            <tr><td>Part Number</td><td><input type="text" value=""   id="partNo"/> </td></tr>
-            <tr><td>Supplier</td><td><select name="supplier" id="supplierSelect"></select></td></tr>
+            <tr><td>Component Name</td><td><input type="text" value=""   id="compName"/> </td><td></td></tr>
+            <tr><td>Part Number</td><td><input type="text" value=""   id="partNo"/> <td></td></tr>
+            <tr><td>Supplier</td><td><select name="supplier" id="supplierSelect"></select></td><td></td></tr>
             <tr><td>Cost (£)</td><td><input type="text" id="cost" /> </td></tr>
-            <tr><td>Manufacturer</td><td><select name="manufacturer" id="manufacturerSelect"></select></td></tr>
-            <tr><td>Datasheet URL</td><td><input type="url" value=""   id="datasheetURL"/> </td></tr>
-            <tr><td>Min Quantity</td><td><input type="text" value=""   id="minQuantity"/> </td></tr>
-            <tr><td>Max Quantity</td><td><input type="text" value=""   id="maxQuantity"/> </td></tr>
-            <tr><td colspan="2"> <input type="button" id="submitFormButton" onclick="submitForm();" value="submit" /></td></tr>
+            <tr><td>Manufacturer</td><td><select name="manufacturer" id="manufacturerSelect"></select></td><td><input type="button" id="addMan" onclick="addManOnClick();" value="submit" /></td></tr>
+            <tr><td>Datasheet URL</td><td><input type="url" value=""   id="datasheetURL"/> </td><td></td></tr>
+            <tr><td>Min Quantity</td><td><input type="text" value=""   id="minQuantity"/> </td><td></td></tr>
+            <tr><td>Max Quantity</td><td><input type="text" value=""   id="maxQuantity"/> </td><td></td></tr>
+            <tr><td colspan="2"> <input type="button" id="submitFormButton" onclick="submitForm();" value="submit" /></td><td></td></tr>
         </table>
     </form>
 {% endblock %}
