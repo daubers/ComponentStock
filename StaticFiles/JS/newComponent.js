@@ -79,7 +79,7 @@ function addSupOnClick(){
     $.get("/supplier/add/form/", function(data){
         $("#dialogDiv").html(data);
         $("div #submitFormButton").hide();
-    })
+    });
     window.adSupDialog.dialog("open");
 }
 
@@ -102,10 +102,9 @@ function submitSup(){
     $.ajax({
         url: "/supplier/add/",
         data: {'DATA': JSON.stringify(DATA) },
-        success: parseSuccess,
         success: loadSuppliers,
         type: "POST"
-    })
+    });
     return true;
 }
 
@@ -122,7 +121,7 @@ function submitMan(){
         data: {'DATA': JSON.stringify(DATA) },
         success: loadManufacturers,
         type: "POST"
-    })
+    });
     return true;
 }
 
@@ -134,7 +133,7 @@ function addManOnClick(){
     $.get("/manufacturer/add/form/", function(data){
         $("#dialogDiv").html(data);
         $("div #submitFormButton").hide();
-    })
+    });
     window.adManDialog.dialog("open");
 }
 
@@ -146,4 +145,29 @@ function addMan(){
     $(function() {
         window.adManDialog.dialog("close");
     });
+}
+
+function submitComponent(){
+    /*
+        Submits the component to the database
+     */
+    var name = $("#compName").val();
+    var partNo = $("#partNo").val();
+    var supplierId = $('#supplierSelect :selected').val();
+    var cost = $("#cost").val();
+    var manufacturerId = $('#manufacturerSelect :selected').val();
+    var datasheetURL = $("#datasheetURL").val();
+    var minQuantity = $("#minQuantity").val();
+    var maxQuantity = $("#maxQuantity").val();
+    var DATA = {"name": name, "cost": cost, "manufacturer": manufacturerId, "part_no": partNo,
+                "datasheet_uri": datasheetURL, "supplier": supplierId, "max_quantity": maxQuantity,
+                "min_quantity": minQuantity}
+    $.ajax({
+        url: "/component/add/",
+        data: {'DATA': JSON.stringify(DATA) },
+        success: parseSuccess,
+        type: "POST"
+    });
+    return true;
+;
 }
