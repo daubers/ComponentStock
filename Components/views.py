@@ -44,7 +44,6 @@ def newManufacturer(request):
     return HttpResponse(json_data, mimetype="application/json")
 
 
-
 def newSupplier(request):
     """
         Create a new supplier in the database
@@ -58,22 +57,41 @@ def newSupplier(request):
             account_no = None
         #now create a new supplier
         try:
-            newSupply = Supplier(name=data['name'], url=data['url'], account_no=account_no, account_username=data['account_username'])
+            newSupply = Supplier(name=data['name'], url=data['url'], account_no=account_no,
+                                 account_username=data['account_username'])
             newSupply.save()
             json_data = json.dumps({"HTTPRESPONSE": newSupply.id})
-        except:
-            json_data = json.dumps({"HTTPRESPONSE": None})
+        except Exception, e:
+            json_data = json.dumps({"HTTPRESPONSE": None, "Error": e.message})
     else:
         json_data = json.dumps({"HTTPRESPONSE": None})
     # json data is just a JSON string now.
     return HttpResponse(json_data, mimetype="application/json")
 
 
+def newSupplierForm(request):
+    """
+        Creates a form for adding new suppliers
+    """
+    t = get_template('Components/newSupplier.html')
+    html = t.render(Context())
+    return HttpResponse(html)
+
 def getSuppliers(request):
     """
         Returns a JSON formatted dictionary of suppliers
     """
-    return None
+    returnObject = None
+    if request.method == "POST":
+        data = json.loads(request.POST['DATA'])
+        if data['id'] is None:
+            returnObject = list(Supplier.objects.all().values())
+        else:
+            returnObject = Supplier.objects.filter(id=data['id']).get()
+        return HttpResponse(json.dumps(returnObject), mimetype="application/json")
+    else:
+        returnObject = list(Supplier.objects.all().values())
+        return HttpResponse(json.dumps(returnObject))
 
 
 def newComponent(request):

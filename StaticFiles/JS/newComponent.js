@@ -22,14 +22,29 @@
     });
  });
 
+ $(function() {
+  window.adSupDialog = $("div#dialogDiv").dialog({
+        modal: true,
+        autoOpen: false,
+        minWidth:408,
+        minHeight: 155,
+        resizable: false,
+        draggable: false,
+        title: "New Supplier",
+        buttons: [ { text: "Add", click: function() { addSup(); } } ]
+    });
+ });
+
 function loadComplete(){
     /* This function is run when the page has finished loading
        it's main job is to populate the various drop down boxes
        on the page
      */
     loadManufacturers();
+    loadSuppliers();
     $(function () {
         $("input#addMan").button({ label: "Add Manufacturer" });
+        $("input#addSup").button({ label: "Add Supplier" });
     });
 }
 
@@ -44,6 +59,56 @@ function loadManufacturers(){
         });
     });
 }
+
+function loadSuppliers(){
+    /*
+        Populates the manufacturers drop down
+     */
+    $.getJSON("/supplier/get/", function(data){
+        $.each(data, function() {
+            var option = new Option(this.name, this.id);
+            $("#supplierSelect")[0].add(option);
+        });
+    });
+}
+
+function addSupOnClick(){
+    /*
+        Called when the add manufacturer button is clicked
+     */
+    $.get("/supplier/add/form/", function(data){
+        $("#dialogDiv").html(data);
+        $("div #submitFormButton").hide();
+    })
+    window.adSupDialog.dialog("open");
+}
+
+function addSup(){
+    submitSup();
+    $(function() {
+        window.adManDialog.dialog("close");
+    });
+}
+
+function submitSup(){
+    /*
+        Submits the form using ajax and gets back the response
+     */
+    var name = $('#supName').val();
+    var url = $('#supUrl').val();
+    var accNo = $('#supAccNo').val();
+    var accUser = $('#supUsername').val();
+    var DATA = {"name": name, "url": url, "account_no": accNo, "account_username": accUser};
+    $.ajax({
+        url: "/supplier/add/",
+        data: {'DATA': JSON.stringify(DATA) },
+        success: parseSuccess,
+        success: loadSuppliers,
+        type: "POST"
+    })
+    return true;
+}
+
 
 function submitMan(){
     /*
