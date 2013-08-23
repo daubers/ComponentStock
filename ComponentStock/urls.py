@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^stock/view', 'Stock.views.stock'),
+    url(r'^component/get/(?P<dataTable>\w{0,50})/$', 'Components.views.getComponents'),
     url(r'^component/add/form/', 'Components.views.newComponentForm'),
     url(r'^component/add/', 'Components.views.newComponent'),
     url(r'^supplier/add/form/', 'Components.views.newSupplierForm'),

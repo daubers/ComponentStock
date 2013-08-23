@@ -147,3 +147,21 @@ def getManufacturer(request):
     else:
         returnObject = list(Manufacturer.objects.all().values())
         return HttpResponse(json.dumps(returnObject))
+
+def getComponents(request, dataTable=None):
+    """
+        Returns a JSON dictionary containing all of the components in the database
+    """
+    returnObject = None
+    if dataTable is not None:
+        #We need to put this into an aaData object
+        returnObject = {"aaData": list(Component.objects.all().values()), }
+    return HttpResponse(json.dumps(returnObject), mimetype="application/json")
+
+def viewComponents(request):
+    """
+        Goes to a page where all existing components can be viewed
+    """
+    t = get_template('Components/viewComponents.html')
+    html = t.render(Context())
+    return HttpResponse(html)
