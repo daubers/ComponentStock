@@ -17,7 +17,7 @@ function submitForm(){
     var DATA = {"name": name, "url": url, "account_no": accNo, "account_username": accUser};
     $.ajax({
         url: "/supplier/add/",
-        data: {'DATA': JSON.stringify(DATA) },
+        data: {'DATA': JSON.stringify(DATA), "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val() },
         success: parseSuccess,
         type: "POST"
     })

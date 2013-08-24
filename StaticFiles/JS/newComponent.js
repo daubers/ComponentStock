@@ -10,7 +10,7 @@
 
 // Create the dialogs here so we can open/close them at will
  $(function() {
-  window.adManDialog = $("div#dialogDiv").dialog({
+  window.adManDialog = $("div#dialogManDiv").dialog({
         modal: true,
         autoOpen: false,
         minWidth:408,
@@ -23,7 +23,7 @@
  });
 
  $(function() {
-  window.adSupDialog = $("div#dialogDiv").dialog({
+  window.adSupDialog = $("div#dialogSupDiv").dialog({
         modal: true,
         autoOpen: false,
         minWidth:408,
@@ -77,7 +77,7 @@ function addSupOnClick(){
         Called when the add manufacturer button is clicked
      */
     $.get("/supplier/add/form/", function(data){
-        $("#dialogDiv").html(data);
+        $("#dialogSupDiv").html(data);
         $("div #submitFormButton").hide();
     });
     window.adSupDialog.dialog("open");
@@ -86,7 +86,7 @@ function addSupOnClick(){
 function addSup(){
     submitSup();
     $(function() {
-        window.adManDialog.dialog("close");
+        window.adSupDialog.dialog("close");
     });
 }
 
@@ -101,7 +101,7 @@ function submitSup(){
     var DATA = {"name": name, "url": url, "account_no": accNo, "account_username": accUser};
     $.ajax({
         url: "/supplier/add/",
-        data: {'DATA': JSON.stringify(DATA) },
+        data: {'DATA': JSON.stringify(DATA), "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val() },
         success: loadSuppliers,
         type: "POST"
     });
@@ -118,7 +118,7 @@ function submitMan(){
     var DATA = {"name": name, "url": url};
     $.ajax({
         url: "/manufacturer/add/",
-        data: {'DATA': JSON.stringify(DATA) },
+        data: {'DATA': JSON.stringify(DATA), "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val() },
         success: loadManufacturers,
         type: "POST"
     });
@@ -131,7 +131,7 @@ function addManOnClick(){
         Called when the add manufacturer button is clicked
      */
     $.get("/manufacturer/add/form/", function(data){
-        $("#dialogDiv").html(data);
+        $("#dialogManDiv").html(data);
         $("div #submitFormButton").hide();
     });
     window.adManDialog.dialog("open");
@@ -164,7 +164,7 @@ function submitComponent(){
                 "min_quantity": minQuantity}
     $.ajax({
         url: "/component/add/",
-        data: {'DATA': JSON.stringify(DATA) },
+        data: {'DATA': JSON.stringify(DATA), "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val() },
         success: parseSuccess,
         type: "POST"
     });

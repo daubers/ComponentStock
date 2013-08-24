@@ -27,7 +27,7 @@ class Component(models.Model):
     name = models.CharField(max_length=255)
     part_no = models.CharField(max_length=255)
     supplier = models.ForeignKey(Supplier)
-    cost = models.IntegerField()
+    cost = models.FloatField()
     manufacturer = models.ForeignKey(Manufacturer)
     datasheet_uri = models.URLField(null=True)
     max_quantity = models.IntegerField(null=True)

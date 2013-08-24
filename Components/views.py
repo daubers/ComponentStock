@@ -12,7 +12,7 @@ def newManufacturerForm(request):
         A simple form to add a new manufacturer
     """
     t = get_template('Components/newManufacturerForm.html')
-    html = t.render(Context())
+    html = t.render(RequestContext(request))
     return HttpResponse(html)
 
 
@@ -21,7 +21,7 @@ def newComponentForm(request):
         A simple form to add a new component
     """
     t = get_template('Components/newComponent.html')
-    html = t.render(Context())
+    html = t.render(RequestContext(request))
     return HttpResponse(html)
 
 
@@ -74,7 +74,7 @@ def newSupplierForm(request):
         Creates a form for adding new suppliers
     """
     t = get_template('Components/newSupplier.html')
-    html = t.render(Context())
+    html = t.render(RequestContext(request))
     return HttpResponse(html)
 
 def getSuppliers(request):
@@ -163,5 +163,5 @@ def viewComponents(request):
         Goes to a page where all existing components can be viewed
     """
     t = get_template('Components/viewComponents.html')
-    html = t.render(Context())
+    html = t.render(RequestContext(request))
     return HttpResponse(html)

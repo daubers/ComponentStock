@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block content %}
-    <div id="dialogDiv"></div>
+    <div id="dialogManDiv"></div>
+    <div id="dialogSupDiv"></div>
     <form>
+        {% csrf_token %}
         <table>
             <tr><td>Component Name</td><td><input type="text" value=""   id="compName"/> </td><td></td></tr>
             <tr><td>Part Number</td><td><input type="text" value=""   id="partNo"/> <td></td></tr>

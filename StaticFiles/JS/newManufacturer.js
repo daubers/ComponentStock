@@ -18,7 +18,7 @@ function submitForm(){
     var DATA = {"name": name, "url": url};
     $.ajax({
         url: "/manufacturer/add/",
-        data: {'DATA': JSON.stringify(DATA) },
+        data: {'DATA': JSON.stringify(DATA), "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val() },
         success: parseSuccess,
         type: "POST"
     })

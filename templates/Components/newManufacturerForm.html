@@ -6,6 +6,7 @@
 
 {% block content %}
     <form>
+    {% csrf_token %}
         <table>
             <tr><td>Manufacturer Name</td><td><input type="text" value=""   id="manName"/> </td></tr>
             <tr><td>Manufacturer URL</td><td><input type="url" value="" id="manUrl"/> </td></tr>
