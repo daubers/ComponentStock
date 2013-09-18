@@ -126,11 +126,13 @@ INSTALLED_APPS = (
     'django_extensions',
     'Stock',
     'Components',
+    'CompProjects',
 )
 
 PROJECT_APPS = (
     'Stock',
     'Components',
+    'CompProjects',
 )
 
 JENKINS_TASKS = (

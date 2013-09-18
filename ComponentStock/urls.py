@@ -25,4 +25,5 @@ urlpatterns = patterns('',
     url(r'^manufacturer/add/form/', 'Components.views.newManufacturerForm'),
     url(r'^manufacturer/add/', 'Components.views.newManufacturer'),
     url(r'^manufacturer/get/', 'Components.views.getManufacturer'),
+    url(r'^project/add/', 'CompProjects.views.addProject'),
 )
