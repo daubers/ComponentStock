@@ -155,7 +155,11 @@ def getComponents(request, dataTable=None):
     returnObject = None
     if dataTable is not None:
         #We need to put this into an aaData object
-        returnObject = {"aaData": list(Component.objects.all().values()), }
+        componentsList = []
+        for i in Component.objects.all().values():
+            i["manufacturer"] = list(Manufacturer.objects.filter(id=i["manufacturer_id"]).all().values())
+            componentsList.append(i)
+        returnObject = {"aaData": [i,], }
     return HttpResponse(json.dumps(returnObject), mimetype="application/json")
 
 def viewComponents(request):
