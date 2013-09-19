@@ -38,3 +38,12 @@ def addProject(request):
         json_data = json.dumps({"HTTPRESPONSE": None})
     # json data is just a JSON string now.
     return HttpResponse(json_data, mimetype="application/json")
+
+
+def addForm(request):
+    """
+        Creates a form for adding new projects
+    """
+    t = get_template('CompProjects/AddProject.html')
+    html = t.render(RequestContext(request))
+    return HttpResponse(html)

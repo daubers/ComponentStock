@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
+
+{% extends "MainTemplate.html" %}
+{%  block head %}
     <title>Current Stock</title>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <table>
         <tr><th>Name</th><th>Part No</th><th>Cost</th><th>Quantity</th></tr>
         {% for component in stock.Stock.all %}
@@ -11,5 +12,4 @@
         {% endfor %}
 
     </table>
-</body>
-</html>
+{% endblock %}
